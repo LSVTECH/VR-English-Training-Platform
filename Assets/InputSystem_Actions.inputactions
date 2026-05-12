@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "InputSystem_Actions",
     "maps": [
         {
@@ -986,6 +987,34 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "VR",
+            "id": "ecdf473d-7442-46ab-addd-15926b350c2c",
+            "actions": [
+                {
+                    "name": "Record",
+                    "type": "Button",
+                    "id": "97b712a6-67ee-4b25-8538-571c0a940147",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c0010b0e-ce7b-4efc-a93c-3c77358148d5",
+                    "path": "<XRController>{RightHand}/{Primary2DAxisClick}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";XR",
+                    "action": "Record",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

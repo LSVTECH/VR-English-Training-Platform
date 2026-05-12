@@ -104,3 +104,31 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# ==========================================
+# VR English Training Platform - Custom Rules
+# ==========================================
+
+# --- Python & Backend ---
+backend/__pycache__/
+backend/*.py[cod]
+backend/*$py.class
+backend/.env
+backend/.venv/
+backend/env/
+backend/venv/
+backend/build/
+backend/dist/
+backend/*.egg-info/
+
+# --- Audio Generated Files ---
+# Ignorar los audios de prueba generados en el servidor
+backend/static/audio/*.mp3
+backend/static/audio/*.wav
+!backend/static/audio/mock.mp3
+
+# --- IDE & OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
