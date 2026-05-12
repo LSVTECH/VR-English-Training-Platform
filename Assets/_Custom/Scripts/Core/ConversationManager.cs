@@ -18,6 +18,7 @@ namespace VREnglish.Core
 
         [Header("UI References")]
         [SerializeField] private VREnglish.UI.NPCSpeechBubble speechBubble;
+        [SerializeField] private VREnglish.UI.VRPlayerHUD playerHUD;
         
         public enum ConversationState
         {
@@ -37,6 +38,7 @@ namespace VREnglish.Core
             {
                 backendClient.OnSubtitleReceived += HandleSubtitleReceived;
                 backendClient.OnAudioUrlReceived += HandleAudioUrlReceived;
+                backendClient.OnScoreReceived += HandleScoreReceived;
                 backendClient.OnError += HandleNetworkError;
             }
         }
@@ -48,6 +50,7 @@ namespace VREnglish.Core
             {
                 backendClient.OnSubtitleReceived -= HandleSubtitleReceived;
                 backendClient.OnAudioUrlReceived -= HandleAudioUrlReceived;
+                backendClient.OnScoreReceived -= HandleScoreReceived;
                 backendClient.OnError -= HandleNetworkError;
             }
         }
@@ -70,6 +73,14 @@ namespace VREnglish.Core
         {
             string fullUrl = audioUrl.StartsWith("http") ? audioUrl : "http://localhost:8080" + audioUrl;
             StartCoroutine(DownloadAndPlayAudio(fullUrl));
+        }
+
+        private void HandleScoreReceived(float score, string feedback)
+        {
+            if (playerHUD != null)
+            {
+                playerHUD.UpdateScore(score, feedback);
+            }
         }
 
         private System.Collections.IEnumerator DownloadAndPlayAudio(string url)
@@ -123,6 +134,7 @@ namespace VREnglish.Core
         {
             if (currentState != ConversationState.Idle) return;
             audioRecorder.StartListening();
+            if (playerHUD != null) playerHUD.SetMicActive(true);
             ChangeState(ConversationState.ListeningToPlayer);
         }
 
@@ -133,6 +145,7 @@ namespace VREnglish.Core
         {
             if (currentState != ConversationState.ListeningToPlayer) return;
             audioRecorder.StopListening();
+            if (playerHUD != null) playerHUD.SetMicActive(false);
             // El audio se enviará automáticamente via el evento OnSpeechRecorded
         }
     }

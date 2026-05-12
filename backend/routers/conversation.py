@@ -53,7 +53,8 @@ async def process_turn(
         "transcription": transcription, 
         "ai_response_text": ai_text, 
         "audio_url": audio_url, 
-        "scoring": score, 
+        "score": score.get("points", 0), 
+        "feedback": score.get("feedback", ""),
         "scenario_state": new_state 
     } 
 
@@ -93,7 +94,8 @@ async def process_turn_text(
             "transcription": text, 
             "ai_response_text": ai_text, 
             "audio_url": audio_url, 
-            "scoring": score, 
+            "score": score.get("points", 0), 
+            "feedback": score.get("feedback", ""),
             "scenario_state": new_state 
         }
     except Exception as e:

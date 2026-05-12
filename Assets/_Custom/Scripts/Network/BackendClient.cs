@@ -19,6 +19,7 @@ namespace VREnglish.Network
 
         public event Action<string> OnSubtitleReceived;
         public event Action<string> OnAudioUrlReceived;
+        public event Action<float, string> OnScoreReceived;
         public event Action<string> OnError;
 
         public void SendAudioAsync(byte[] wavData)
@@ -59,6 +60,7 @@ namespace VREnglish.Network
                 var response = JsonUtility.FromJson<BackendResponse>(json);
                 OnSubtitleReceived?.Invoke(response.ai_response_text);
                 OnAudioUrlReceived?.Invoke(response.audio_url);
+                OnScoreReceived?.Invoke(response.score, response.feedback);
             }
             catch (Exception e)
             {
@@ -72,6 +74,8 @@ namespace VREnglish.Network
             public string transcription;
             public string ai_response_text;
             public string audio_url;
+            public float score;
+            public string feedback;
         }
     }
 }

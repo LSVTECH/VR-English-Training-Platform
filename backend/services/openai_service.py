@@ -11,7 +11,7 @@ async def get_ai_response(history: list, level: str, state: str):
     
     if MOCK_MODE:
         # Respuesta fija para pruebas
-        return "This is a mock AI response for testing purposes."
+        return "Welcome to the Grand Hotel! I can help you with your check-in. May I have your name and reservation number, please?"
     
     # Código real (mantener por si se desactiva mock)
     response = await client.chat.completions.create(
